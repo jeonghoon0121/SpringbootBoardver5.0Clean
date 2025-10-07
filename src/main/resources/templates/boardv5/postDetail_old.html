@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>너도미사</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+
+<body>
+
+
+</body>
+<header>
+    <a href="/boardv5/home" class="logo" style="text-decoration: none; color: inherit;">
+        미사일지
+    </a>
+
+    <nav class="menu1" style="display: flex; gap: 20px;">
+        <a href="/boardv5/home" style="color: white;">홈</a>
+        <div th:each="board : ${boardlist}" style="display: flex; flex-direction: column;">
+            <a th:href="@{'/boardv5/board/' + ${board.boardId}}"
+               th:text="${board.name}"
+               style="color: white; text-decoration: none; font-weight: 500;"></a>
+        </div>
+
+    </nav>
+</header>
+<main id="page-content">
+    <h2 th:text="${post.title}">글 제목</h2>
+    <p><strong>작성자:</strong> <span th:text="${post.authorId}">작성자</span></p>
+    <p><strong>내용:</strong></p>
+    <div th:text="${post.content}">글 내용</div>
+
+    <hr>
+    <h3>댓글</h3>
+    <ul>
+        <li th:each="comment : ${commentlist}" th:text="${comment.content}">댓글 내용</li>
+    </ul>
+    <form th:action="@{/boardv5/comment/add/{postId}(postId=${post.postId})}" method="post" style="margin-top: 20px;">
+        <label>작성자 ID:</label>
+        <input type="text" name="authorId" required><br>
+
+        <label>비밀번호:</label>
+        <input type="password" name="password" required><br>
+
+        <label>댓글 내용:</label><br>
+        <textarea name="content" rows="4" cols="50" required></textarea><br>
+
+        <button type="submit" style="margin-top: 10px;">댓글 작성</button>
+    </form>
+
+</main>
+
+<footer id="page-footer">
+    <p>&copy; 2025 JeongHoon Corp. 모든 권리 보유.</p>
+</footer>
+
+</body>
+</html>

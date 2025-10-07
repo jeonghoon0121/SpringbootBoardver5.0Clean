@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const successMessage = `[[${ successMessage }]]`
+        if(successMessage) {
+            alert(successMessage);
+        }
+    </script>
+</head>
+<body>
+<table align="center" border="1">
+    <tr>
+        <th>댓글id</th>
+        <th>글id</th>
+        <th>글쓴이</th>
+        <th>비밀번호</th>
+        <th>내용</th>
+        <th>ip</th>
+        <th>작성시간</th>
+        <th>수정시간</th>
+    </tr>
+    <tr th:each="comment : ${ commentDTOList }">
+        <td th:text="${ comment.commentId }"></td>
+        <td th:text="${ comment.postId }"></td>
+        <td th:text="${ comment.authorId }"></td>
+        <td th:text="${ comment.password }"></td>
+        <td th:text="${ comment.content }"></td>
+        <td th:text="${ comment.ipHash }"></td>
+        <td th:text="${ comment.createdAt }"></td>
+        <td th:text="${ comment.updatedAt }"></td>
+    </tr>
+</table>
+</body>
+</html>

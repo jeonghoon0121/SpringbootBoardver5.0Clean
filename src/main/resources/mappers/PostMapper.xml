@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.com.post.PostMapper">
+    <resultMap id="postResultMap" type="com.ohgiraffers.com.post.PostDTO">
+        <id property="postId" column="post_id"/>
+        <result property="boardId" column="board_id"/>
+        <result property="authorId" column="author_id"/>
+        <result property="password" column="password"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="ipHash" column="ip_hash"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    <select id="findAllPosts" resultMap="postResultMap">
+        SELECT
+        post_id,
+        board_id,
+        author_id,
+        password,
+        title,
+        content,
+        view_count,
+        ip_hash,
+        created_at,
+        updated_at
+        FROM posts
+        ORDER by post_Id
+    </select>
+    <insert id="addNewPost" parameterType="com.ohgiraffers.com.post.PostDTO">
+        INSERT INTO posts
+        (
+        board_id,
+        author_id,
+        password,
+        title,
+        content,
+        view_count,
+        ip_hash,
+        created_at,
+        updated_at
+        )
+        VALUES
+        (
+        #{ boardId }
+        ,#{ authorId }
+        ,#{ password }
+        ,#{ title }
+        ,#{ content }
+        ,#{ viewCount }
+        ,#{ ipHash }
+        ,#{ createdAt }
+        ,#{ updatedAt }
+        )
+    </insert>
+    <update id="updatePost" parameterType="com.ohgiraffers.com.post.PostDTO">
+        UPDATE posts
+        SET title= #{ title },
+        content= #{ content },
+        updated_at= #{ updatedAt }
+        WHERE post_id= #{ postId }
+        AND author_id= #{ authorId }
+        AND password= #{ password }
+    </update>
+    <delete id="deletePost" parameterType="com.ohgiraffers.com.post.PostDTO">
+        DELETE FROM posts
+        WHERE post_id= #{ postId }
+        AND author_id= #{ authorId }
+        AND password= #{ password }
+    </delete>
+
+</mapper>

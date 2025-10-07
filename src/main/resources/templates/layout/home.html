@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>너도미사</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">너도미사</div>
+
+    <nav class="menu1" style="display: flex; gap: 20px;">
+        <a href="/layout/home" style="color: white;">홈</a>
+        <div th:each="board : ${boardV3DTOs}" style="display: flex; flex-direction: column;">
+            <a th:href="@{'/layout/' + ${board.boardId}}"
+               th:text="${board.name}"
+               style="color: white; text-decoration: none; font-weight: 500;"></a>
+        </div>
+    </nav>
+</header>
+
+
+<main id="page-content">
+    <table class="centered">
+        <tr>
+            <th>게시판이름</th>
+            <th>게시판설명</th>
+        </tr>
+        <tr th:each="board : ${ boardV3DTOs }">
+            <td>
+                <a th:href="@{'/layout/' + ${board.boardId}}" th:text="${ board.name }"></a>
+            </td>
+            <td th:text="${ board.description }"></td>
+        </tr>
+    </table>
+</main>
+
+<footer id="page-footer">
+    <p>&copy; 2025 JeongHoon Corp. 모든 권리 보유.</p>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const successMessage = `[[${ successMessage }]]`
+        if(successMessage) {
+            alert(successMessage);
+        }
+    </script>
+</head>
+<body>
+<table align="center" border="1">
+    <tr>
+        <th>게시판id</th>
+        <th>게시판이름</th>
+        <th>게시판설명</th>
+    </tr>
+    <tr th:each="board : ${ boardDTOList }">
+        <td th:text="${ board.boardId }"></td>
+        <td th:text="${ board.name }"></td>
+        <td th:text="${ board.description }"></td>
+    </tr>
+</table>
+</body>
+</html>

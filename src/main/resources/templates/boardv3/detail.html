@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>글 상세</h1>
+    <style>
+        table.centered {
+            margin: 0 auto;
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+    </style>
+        <table class="centered">
+        <tr>
+            <th>글ID</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>글쓴시간</th>
+            <th>수정시간</th>
+        </tr>
+        <tr th:each="post : ${postV3DTOs}">
+            <td th:text="${post.postId}"></td>
+            <td>
+                <a th:href="@{/boardv3/detail/{id}(id=${post.postId})}" th:text="${post.title}"></a>
+
+            </td>
+            <td th:text="${post.authorId}"></td>
+            <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+
+
+            </tr>
+    </table>
+    <table class="centered">
+        <tr>
+            <th>댓글ID</th>
+            <th>글ID</th>
+            <th>작성자</th>
+            <th>내용</th>
+        </tr>
+        <tr th:each="comment : ${commentV3DTOs}">
+            <td th:text="${comment.commentId}"></td>
+            <td th:text="${comment.postId}"></td>
+            <td th:text="${comment.authorId}"></td>
+            <td th:text="${comment.content}"></td>
+        </tr>
+
+    </table>
+</body>
+</html>

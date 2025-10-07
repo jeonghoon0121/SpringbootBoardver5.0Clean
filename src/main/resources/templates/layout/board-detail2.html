@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>너도미사</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <div class="logo">너도미사</div>
+
+    <nav class="menu1" style="display: flex; gap: 20px;">
+        <a href="/layout/home" style="color: white;">홈</a>
+        <div th:each="board : ${boardV3DTOs}" style="display: flex; flex-direction: column;">
+            <a th:href="@{'/layout/' + ${board.boardId}}"
+               th:text="${board.name}"
+               style="color: white; text-decoration: none; font-weight: 500;"></a>
+        </div>
+    </nav>
+</header>
+<main id="page-content">
+    <!-- 글쓰기 버튼 -->
+    <a th:href="@{'/layout/post/add/' + ${boardId}}" class="write-button">글쓰기</a>
+
+    <!-- 게시글 카드 리스트 -->
+    <div class="post-list">
+        <div class="post-card" th:each="post : ${postV3DTOs}">
+            <h3>
+                <a th:href="@{'/layout/post/' + ${post.postId}}" th:text="${post.title}"></a>
+            </h3>
+            <p><strong>작성자:</strong> <span th:text="${post.authorId}"></span></p>
+            <p><strong>게시판ID:</strong> <span th:text="${post.postId}"></span></p>
+            <div class="actions">
+                <a th:href="@{'/layout/post/update/' + ${post.postId}}">
+                    <button>수정</button>
+                </a>
+                <a th:href="@{'/layout/post/delete/' + ${post.postId}}">
+                    <button>삭제</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="page-footer">
+    <p>&copy; 2025 JeongHoon Corp. 모든 권리 보유.</p>
+</footer>
+</body>
+</html>

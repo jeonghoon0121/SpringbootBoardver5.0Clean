@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.com.comment.CommentMapper">
+    <resultMap id="commentResultMap" type="com.ohgiraffers.com.comment.CommentDTO">
+        <id property="commentId" column="comment_id"/>
+        <result property="postId" column="post_id"/>
+        <result property="authorId" column="author_id"/>
+        <result property="password" column="password"/>
+        <result property="content" column="content"/>
+        <result property="ipHash" column="ip_hash"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    <select id="findAllComments" resultMap="commentResultMap">
+        SELECT
+        comment_id,
+        post_id,
+        author_id,
+        password,
+        content,
+        ip_Hash,
+        created_at,
+        updated_at
+        FROM comments
+        ORDER by comment_id
+    </select>
+    <insert id="addNewComment" parameterType="com.ohgiraffers.com.comment.CommentDTO">
+        INSERT INTO comments
+        (
+        post_id,
+        author_id,
+        password,
+        content,
+        ip_hash,
+        created_at,
+        updated_at
+        )
+        VALUES
+        (
+        #{ postId }
+        ,#{ authorId }
+        ,#{ password }
+        ,#{ content }
+        ,#{ ipHash }
+        ,#{ createdAt }
+        ,#{ updatedAt }
+        )
+    </insert>
+    <update id="updateComment" parameterType="com.ohgiraffers.com.post.PostDTO">
+        UPDATE comments
+        SET content= #{ content },
+        updated_at= #{ updatedAt }
+        WHERE comment_id= #{ commentId }
+        AND author_id= #{ authorId }
+        AND password= #{ password }
+    </update>
+    <delete id="deleteComment" parameterType="com.ohgiraffers.com.post.PostDTO">
+        DELETE FROM comments
+        WHERE comment_id= #{ commentId }
+        AND author_id= #{ authorId }
+        AND password= #{ password }
+    </delete>
+</mapper>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>너도미사</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+
+
+<body>
+
+<header>
+    <a href="/boardv5/home" class="logo" style="text-decoration: none; color: inherit;">
+        미사일지
+    </a>
+
+    <nav class="menu1" style="display: flex; gap: 20px;">
+        <a href="/boardv5/home" style="color: white;">home</a>
+        <div th:each="board : ${boardlist}" style="display: flex; flex-direction: column;">
+            <a th:href="@{'/boardv5/board/' + ${board.boardId}}"
+               th:text="${board.name}"
+               style="color: white; text-decoration: none; font-weight: 500;"></a>
+        </div>
+
+    </nav>
+</header>
+
+<main id="page-content">
+    <div style="margin-top: 30px;">
+        <a th:href="@{'/boardv5/post/add/' + ${board.boardId}}">
+            <button>글쓰기</button>
+        </a>
+    </div>
+
+    <h2 th:text="${board.name}">게시판 이름</h2>
+
+    <table class="centered">
+        <thead>
+        <tr>
+            <th>글 번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${postlist}">
+            <td th:text="${post.postId}">1</td>
+            <td>
+                <a th:href="@{'/boardv5/post/' + ${post.postId}}" th:text="${post.title}">제목</a>
+            </td>
+            <td th:text="${post.authorId}">작성자</td>
+            <td>
+                <a th:href="@{'/boardv5/post/update/' + ${post.postId}}"><button>수정</button></a>
+                <a th:href="@{'/boardv5/post/delete/' + ${post.postId}}"><button>삭제</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer id="page-footer">
+    <p>&copy; 2025 JeongHoon Corp. 모든 권리 보유.</p>
+</footer>
+
+</body>
+</html>

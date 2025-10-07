@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>너도미사</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2e8b57;
+            color: white;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav.menu1 {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav.menu1 a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav.menu1 a:hover {
+            color: #ffd700;
+        }
+
+        main {
+            padding: 40px;
+            background-color: #eef6f2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .board-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .board-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .board-card a {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+
+        .board-card a:hover {
+            text-decoration: underline;
+        }
+
+        .board-description {
+            margin-top: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        footer {
+            background-color: #2e8b57;
+            color: white;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">너도미사</div>
+    <nav class="menu1">
+        <a href="/layout/home">홈</a>
+        <span th:each="board : ${boardV3DTOs}">
+            <a th:href="@{'/layout/' + ${board.boardId}}" th:text="${board.name}"></a>
+        </span>
+    </nav>
+</header>
+
+<main id="page-content">
+    <div class="board-card" th:each="board : ${boardV3DTOs}">
+        <a th:href="@{'/layout/' + ${board.boardId}}" th:text="${board.name}"></a>
+        <p class="board-description" th:text="${board.description}"></p>
+    </div>
+</main>
+
+<footer id="page-footer">
+    <p>&copy; 2025 JeongHoon Corp. 모든 권리 보유.</p>
+</footer>
+
+</body>
+</html>
