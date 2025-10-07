@@ -1,5 +1,4 @@
 package com.ohgiraffers.com.boardver5;
-import com.ohgiraffers.com.boardver3.PostV3DTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
