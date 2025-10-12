@@ -13,11 +13,11 @@
 
 <header>
     <a href="/boardv5/home" class="logo" style="text-decoration: none; color: inherit;">
-        미사일지
+        weblog
     </a>
 
     <nav class="menu1" style="display: flex; gap: 20px;">
-        <a href="/boardv5/home" style="color: white;">home</a>
+        <a href="/boardv5/home" style="color: white;">Home</a>
         <div th:each="board : ${boardlist}" style="display: flex; flex-direction: column;">
             <a th:href="@{'/boardv5/board/' + ${board.boardId}}"
                th:text="${board.name}"
