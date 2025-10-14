@@ -31,8 +31,8 @@
     <h2 th:text="${post.title}">글 제목</h2>
     <p><strong>작성자:</strong> <span th:text="${post.authorId}">작성자</span></p>
     <p><strong>내용:</strong></p>
-    <div th:text="${post.content}">글 내용</div>
-
+<!--    <div th:text="${post.content}">글 내용</div>-->
+    <div th:text="${post.content}" style="white-space: pre-line;">글 내용</div>
     <hr>
     <h3>댓글</h3>
     <ul>
