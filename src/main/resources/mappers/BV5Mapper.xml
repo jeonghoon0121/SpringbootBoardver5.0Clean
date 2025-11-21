@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="com.ohgiraffers.com.boardver5.BV5Mapper">
-    <resultMap id="boardResultMap" type="com.ohgiraffers.com.boardver5.BV5DTOBoard">
+    <mapper namespace="com.ohgiraffers.com.boardver5.model.dao.Mapper">
+    <resultMap id="boardResultMap" type="com.ohgiraffers.com.boardver5.model.dto.BoardDTO">
         <id property="boardId" column="board_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
         <result property="userActive" column="user_active"/>
         <result property="adminActive" column="admin_active"/>
     </resultMap>
-    <resultMap id="postResultMap" type="com.ohgiraffers.com.boardver5.BV5DTOPost">
+    <resultMap id="postResultMap" type="com.ohgiraffers.com.boardver5.model.dto.PostDTO">
         <id property="postId" column="post_id"/>
         <result property="boardId" column="board_id"/>
         <result property="authorId" column="author_id"/>
@@ -29,7 +29,7 @@
         <result property="isSecret" column="is_secret"/>
 
     </resultMap>
-    <resultMap id="commentResultMap" type="com.ohgiraffers.com.boardver5.BV5DTOComment">
+    <resultMap id="commentResultMap" type="com.ohgiraffers.com.boardver5.model.dto.CommentDTO">
         <id property="commentId" column="comment_id"/>
         <result property="postId" column="post_id"/>
         <result property="authorId" column="author_id"/>
@@ -112,7 +112,7 @@
         FROM comment
         WHERE comment_id= #{ comment_id }
     </select>
-    <insert id="addNewPost" parameterType="com.ohgiraffers.com.boardver5.BV5DTOPost">
+    <insert id="addNewPost" parameterType="com.ohgiraffers.com.boardver5.model.dto.PostDTO">
         INSERT INTO post (
         board_id,
         author_id,
@@ -135,7 +135,7 @@
         #{ updatedAt }
         )
     </insert>
-    <update id="updatePost" parameterType="com.ohgiraffers.com.boardver5.BV5DTOPost">
+    <update id="updatePost" parameterType="com.ohgiraffers.com.boardver5.model.dto.PostDTO">
         UPDATE post
         SET
         title = #{ title },
@@ -145,13 +145,13 @@
         AND author_id = #{ authorId }
         AND password = #{ password }
     </update>
-    <delete id="deletePost" parameterType="com.ohgiraffers.com.boardver5.BV5DTOPost">
+    <delete id="deletePost" parameterType="com.ohgiraffers.com.boardver5.model.dto.PostDTO">
         DELETE FROM post
         WHERE post_id = #{ postId }
         AND author_id = #{ authorId }
         AND password = #{ password }
     </delete>
-    <insert id="addComment" parameterType="com.ohgiraffers.com.boardver5.BV5DTOComment">
+    <insert id="addComment" parameterType="com.ohgiraffers.com.boardver5.model.dto.CommentDTO">
         INSERT INTO comment (
         post_id,
         author_id,
@@ -170,7 +170,7 @@
         #{updatedAt}
         )
     </insert>
-    <update id="updateComment" parameterType="com.ohgiraffers.com.boardver5.BV5DTOComment">
+    <update id="updateComment" parameterType="com.ohgiraffers.com.boardver5.model.dto.CommentDTO">
         UPDATE comment
         SET
         content = #{content},
@@ -180,7 +180,7 @@
         AND author_id = #{authorId}
         AND password = #{password}
     </update>
-    <delete id="deleteComment" parameterType="com.ohgiraffers.com.boardver5.BV5DTOComment">
+    <delete id="deleteComment" parameterType="com.ohgiraffers.com.boardver5.model.dto.CommentDTO">
         DELETE FROM comment
         WHERE comment_id = #{commentId}
         AND author_id = #{authorId}
