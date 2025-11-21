@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/boardv5/post")
+@RequestMapping("/post")
 public class PostController {
     private final BoardService boardService;
     public PostController(BoardService boardService) {
@@ -22,7 +22,7 @@ public class PostController {
         model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("boardId", boardId);
-        return "boardv5/postAdd";
+        return "postAdd";
     }
     @GetMapping("/update/{postId}")
     public String showPostUpdateForm(@PathVariable int postId, Model model) {
@@ -30,7 +30,7 @@ public class PostController {
         model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("postId", postId);
-        return "boardv5/postUpdate";
+        return "postUpdate";
     }
     @GetMapping("/delete/{postId}")
     public String showPostDeleteForm(@PathVariable int postId, Model model) {
@@ -38,7 +38,7 @@ public class PostController {
         model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("postId", postId);
-        return "boardv5/postDelete";
+        return "postDelete";
     }
     /*post 더하기*/
     @PostMapping("/add/{boardId}")
@@ -47,7 +47,7 @@ public class PostController {
 
         postDTO.setBoardId(boardId);
         boardService.addNewPost(postDTO);
-        return "redirect:/boardv5/board/" + boardId;
+        return "redirect:/board/" + boardId;
     }
     /*post 수정*/
     @PostMapping("/update/{postId}")
@@ -55,7 +55,7 @@ public class PostController {
                                    @ModelAttribute PostDTO postDTO) {
         postDTO.setPostId(postId);
         boardService.updatePost(postDTO);
-        return "redirect:/boardv5/post/" + postId;
+        return "redirect:/post/" + postId;
     }
     /*post 삭제*/
     @PostMapping("/delete/{postId}")
@@ -64,6 +64,6 @@ public class PostController {
         postDTO.setPostId(postId);
         int boardId= boardService.findonePost(postDTO.getPostId()).getBoardId();
         boardService.deletePost(postDTO);
-        return "redirect:/boardv5/board/"+boardId;
+        return "redirect:/board/"+boardId;
     }
 }

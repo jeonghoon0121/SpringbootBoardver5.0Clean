@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Controller
-@RequestMapping("/boardv5/comment")
+@RequestMapping("/comment")
 public class CommentController {
     private final BoardService boardService;
     public CommentController(BoardService boardService) {
@@ -22,14 +22,14 @@ public class CommentController {
         model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("postId", postId);
-        return "boardv5/commentAdd";
+        return "commentAdd";
     }
     @PostMapping("/add/{postId}")
     public String handleCommentAdd(@PathVariable int postId,
                                    @ModelAttribute CommentDTO commentDTO) {
         commentDTO.setPostId(postId);
         boardService.addNewComment(commentDTO);
-        return "redirect:/boardv5/post/" + postId;
+        return "redirect:/post/" + postId;
     }
         /*comment수정*/
     @PostMapping("/update/{commentId}")
@@ -38,7 +38,7 @@ public class CommentController {
         commentDTO.setCommentId(commentId);
         int postId= boardService.findoneComment(commentId).getPostId();
         boardService.updateComment(commentDTO);
-        return "redirect:/boardv5/post/" + postId;
+        return "redirect:/post/" + postId;
     }
         /*comment삭제*/
     @PostMapping("/delete/{commentId}")
@@ -47,7 +47,7 @@ public class CommentController {
         commentDTO.setCommentId(commentId);
         int postId= boardService.findoneComment(commentId).getPostId();
         boardService.deleteComment(commentDTO);
-        return "redirect:/boardv5/post/" + postId;
+        return "redirect:/post/" + postId;
     }
 
     }
