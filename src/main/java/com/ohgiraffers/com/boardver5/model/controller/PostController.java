@@ -1,5 +1,8 @@
-package com.ohgiraffers.com.boardver5;
+package com.ohgiraffers.com.boardver5.model.controller;
 
+import com.ohgiraffers.com.boardver5.service.BoardService;
+import com.ohgiraffers.com.boardver5.model.dto.BoardDTO;
+import com.ohgiraffers.com.boardver5.model.dto.PostDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,31 +11,31 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/boardv5/post")
-public class BV5PostController {
-    private final BV5Service bv5Service;
-    public BV5PostController(BV5Service bv5Service) {
-        this.bv5Service = bv5Service;
+public class PostController {
+    private final BoardService boardService;
+    public PostController(BoardService boardService) {
+        this.boardService = boardService;
     }
     @GetMapping("/add/{boardId}")
     public String showPostAddForm(@PathVariable int boardId, Model model) {
-        List<BV5DTOBoard> bv5DTOBoards=bv5Service.findAllBoards();
-        model.addAttribute("boardlist",bv5DTOBoards );
+        List<BoardDTO> boardDTOS = boardService.findAllBoards();
+        model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("boardId", boardId);
         return "boardv5/postAdd";
     }
     @GetMapping("/update/{postId}")
     public String showPostUpdateForm(@PathVariable int postId, Model model) {
-        List<BV5DTOBoard> bv5DTOBoards=bv5Service.findAllBoards();
-        model.addAttribute("boardlist",bv5DTOBoards );
+        List<BoardDTO> boardDTOS = boardService.findAllBoards();
+        model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("postId", postId);
         return "boardv5/postUpdate";
     }
     @GetMapping("/delete/{postId}")
     public String showPostDeleteForm(@PathVariable int postId, Model model) {
-        List<BV5DTOBoard> bv5DTOBoards=bv5Service.findAllBoards();
-        model.addAttribute("boardlist",bv5DTOBoards );
+        List<BoardDTO> boardDTOS = boardService.findAllBoards();
+        model.addAttribute("boardlist", boardDTOS);
 
         model.addAttribute("postId", postId);
         return "boardv5/postDelete";
@@ -40,27 +43,27 @@ public class BV5PostController {
     /*post 더하기*/
     @PostMapping("/add/{boardId}")
     public String handlePostAdd(@PathVariable int boardId,
-                                @ModelAttribute BV5DTOPost bv5DTOPost) {
+                                @ModelAttribute PostDTO postDTO) {
 
-        bv5DTOPost.setBoardId(boardId);
-        bv5Service.addNewPost(bv5DTOPost);
+        postDTO.setBoardId(boardId);
+        boardService.addNewPost(postDTO);
         return "redirect:/boardv5/board/" + boardId;
     }
     /*post 수정*/
     @PostMapping("/update/{postId}")
     public String handlePostUpdate(@PathVariable int postId,
-                                   @ModelAttribute BV5DTOPost bv5DTOPost) {
-        bv5DTOPost.setPostId(postId);
-        bv5Service.updatePost(bv5DTOPost);
+                                   @ModelAttribute PostDTO postDTO) {
+        postDTO.setPostId(postId);
+        boardService.updatePost(postDTO);
         return "redirect:/boardv5/post/" + postId;
     }
     /*post 삭제*/
     @PostMapping("/delete/{postId}")
     public String handlePostDelete(@PathVariable int postId,
-                                   @ModelAttribute BV5DTOPost bv5DTOPost) {
-        bv5DTOPost.setPostId(postId);
-        int boardId=bv5Service.findonePost(bv5DTOPost.getPostId()).getBoardId();
-        bv5Service.deletePost(bv5DTOPost);
+                                   @ModelAttribute PostDTO postDTO) {
+        postDTO.setPostId(postId);
+        int boardId= boardService.findonePost(postDTO.getPostId()).getBoardId();
+        boardService.deletePost(postDTO);
         return "redirect:/boardv5/board/"+boardId;
     }
 }

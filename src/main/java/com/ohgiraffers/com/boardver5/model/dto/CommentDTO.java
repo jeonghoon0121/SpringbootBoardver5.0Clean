@@ -1,8 +1,8 @@
-package com.ohgiraffers.com.boardver5;
+package com.ohgiraffers.com.boardver5.model.dto;
 
 import java.time.LocalDateTime;
 
-public class BV5DTOComment {
+public class CommentDTO {
     private Integer commentId;
     private Integer postId;
     private String authorId;
@@ -11,9 +11,9 @@ public class BV5DTOComment {
     private String ipHash;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    public BV5DTOComment(){}
+    public CommentDTO(){}
 
-    public BV5DTOComment(Integer commentId, Integer postId, String authorId, String password, String content, String ipHash, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CommentDTO(Integer commentId, Integer postId, String authorId, String password, String content, String ipHash, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.commentId = commentId;
         this.postId = postId;
         this.authorId = authorId;

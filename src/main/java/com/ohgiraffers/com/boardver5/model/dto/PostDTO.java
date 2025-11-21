@@ -1,9 +1,9 @@
-package com.ohgiraffers.com.boardver5;
+package com.ohgiraffers.com.boardver5.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class BV5DTOPost {
+public class PostDTO {
     private Integer postId;
     private Integer boardId;
     private String authorId;
@@ -23,9 +23,9 @@ public class BV5DTOPost {
     private Boolean isSecret;
 
 
-    public BV5DTOPost(){}
+    public PostDTO(){}
 
-    public BV5DTOPost(Integer postId, Integer boardId, String authorId, String password, String ipHash, String attachmentUrl, List<String> attachmentUrls, String title, String content, String thumbnailUrl, String accessLevel, String status, Integer viewCount, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean isNotice, Boolean isSecret) {
+    public PostDTO(Integer postId, Integer boardId, String authorId, String password, String ipHash, String attachmentUrl, List<String> attachmentUrls, String title, String content, String thumbnailUrl, String accessLevel, String status, Integer viewCount, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean isNotice, Boolean isSecret) {
         this.postId = postId;
         this.boardId = boardId;
         this.authorId = authorId;

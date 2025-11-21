@@ -1,14 +1,14 @@
-package com.ohgiraffers.com.boardver5;
+package com.ohgiraffers.com.boardver5.model.dto;
 
-public class BV5DTOBoard {
+public class BoardDTO {
     private Integer boardId;
     private String name;
     private String description;
     private Boolean isUserActive;
     private Boolean isAdminActive;
-    public BV5DTOBoard(){}
+    public BoardDTO(){}
 
-    public BV5DTOBoard(Integer boardId, String name, String description, Boolean isUserActive, Boolean isAdminActive) {
+    public BoardDTO(Integer boardId, String name, String description, Boolean isUserActive, Boolean isAdminActive) {
         this.boardId = boardId;
         this.name = name;
         this.description = description;
